@@ -21,6 +21,7 @@ class Grid
     end
   end
 
+  # Returns a string visual of the playing board
   def to_s
     grid = @board_status
     "\n" \
@@ -41,11 +42,12 @@ class Grid
     @board_status.uniq.size == 2
   end
 
+  # Check each row if all three slots are of the same type of symbol
   def row_win?
     row = 0
     win = false
     3.times do
-      if (@board_status[0 + row].eql? @board_status[1 + row]) && (@board_status[0 + row].eql? @board_status[3 + row])
+      if (@board_status[0 + row].eql? @board_status[1 + row]) && (@board_status[0 + row].eql? @board_status[2 + row])
         win = true
       end
       row += 3
@@ -53,6 +55,7 @@ class Grid
     win
   end
 
+  # Check each column if all three slots are of the same type of symbol
   def col_win?
     col = 0
     win = false
@@ -65,6 +68,7 @@ class Grid
     win
   end
 
+  # Check each diagonal if all three slots are of the same type of symbol
   def diagonal_win?
     (@board_status[0].eql? @board_status[4]) && (@board_status[0].eql? @board_status[8]) ||
       (@board_status[2].eql? @board_status[4]) && (@board_status[2].eql? @board_status[6])
@@ -74,6 +78,7 @@ end
 class TicTacToe
   attr_reader :status, :turn
 
+  # Set up variables to track progression of match
   def initialize
     @status = 'Ongoing'
     @turn = 1
@@ -104,6 +109,7 @@ class TicTacToe
     end
   end
 
+  # Decided which player's turn it is
   def player_decider
     if (@turn % 2).zero?
       'Player2'
@@ -112,6 +118,7 @@ class TicTacToe
     end
   end
 
+  # Decided which player's mark it is based on current turn. Player 1 is always X
   def mark_decider(player)
     if player == 'Player1'
       'X'
